@@ -18,7 +18,7 @@ const {MongoClient,ObjectID} = require('mongodb');
     console.log('Success');
 
     const db = client.db(dbName);
-    db.collection('ToDos').insertOne({name:'Atul',city:'BLR'},(err,result)=>{
+    db.collection('ToDos').insertOne({name:'Hales',city:'Mumbai'},(err,result)=>{
         if(err){
             return console.log('Unable to insert data');
             }
