@@ -1,3 +1,4 @@
+const {ObjectID}=require('mongodb');
 var express=require('express');
 var bodyParser=require('body-parser');
 
@@ -28,6 +29,28 @@ Todo.find().then((todos)=>{
     res.status(400).send(e);
 });
 });
+
+app.get('/todos/:id',(req,res)=>{
+var id=req.params.id;
+    // res.send(req.params);
+    if(!ObjectID.isValid(id)){
+       return res.status(404).send();
+        // console.log('ID not Valid');
+    }
+    Todo.findById(id).then((todo)=>{
+        if(!todo){
+            // return console.log('Id not Found');
+        return res.status(404).send();
+        }
+        res.send({todo});
+
+    // console.log('Todo by Id',todo);
+    }).catch((e)=>{
+        res.status(400).send();
+});
+});
+
+
 app.listen(3000,()=>{
     console.log('Server Started');
 });
